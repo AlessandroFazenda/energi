@@ -7,12 +7,14 @@
 - A user, belonging to the above group
 - All four entities should have the same name, or be similarly named in some meaningful way given the context e.g. prod-ci-role, prod-ci-policy, prod-ci-group, prod-ci-user; or just prod-ci. Make the suffixes toggleable, if you wish.
 
-# Structure of the modele:
+# Structure of the module:
+```
 module/
 ├── locals.tf
 ├── main.tf
 ├── output.tf
 └── vars.tf
+```
 
 # How to use it:
 - Create a `module` block.
