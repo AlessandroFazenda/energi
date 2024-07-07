@@ -8,6 +8,9 @@
 - Create a persistent volume of directory `/home/energi/.energicore` which is the data directory (as per Ubuntu migration docs)
 - *Quick note: Just at this point I realise that username should be `nrgstaker` instaed of `energi3` like I created in previous step 1.*
 
+# How to use:
+- Run the command `kubectl apply -f energi3.yaml`
+
 # References:
 - https://wiki.energi.world/docs/guides/linux-vps
 - https://wiki.energi.world/docs/guides/upgrade-ubuntu-20-to-22
