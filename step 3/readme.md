@@ -7,7 +7,7 @@
 - Run trivy on image.
 - Deploy it using kubernetes usign yaml file locate at `/repo/files/`.
 
-# Import notes:
+# Important notes:
 - The jenkins agent running it is same that the server.
 - This pipeline assumes all required software are already installed on Jenkins agent.
 
