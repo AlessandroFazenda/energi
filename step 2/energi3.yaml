@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: energi-node
+spec:
+  serviceName: "energi"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: energi
+  template:
+    metadata:
+      labels:
+        app: energi
+    spec:
+      containers:
+      - name: energi
+        image: energi3:latest
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1"
+          limits:
+            memory: "4Gi"
+            cpu: "2"
+        ports:
+        - containerPort: 39797
+          name: energi-port
+        volumeMounts:
+        - name: energi-data
+          mountPath: /home/energi/.energicore
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+  volumeClaimTemplates:
+  - metadata:
+      name: energi-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 200Gi

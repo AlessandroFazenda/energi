@@ -1,0 +1,51 @@
+pipeline {
+    agent {
+        label "local"
+    }
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh """
+                       cd /repo/files/
+                       docker build -t energi3:latest .
+                       """
+                }
+            }
+        }
+
+        stage('Scan Docker Image with Trivy') {
+            steps {
+                script {
+                    sh """
+                       trivy image energi3:latest
+                       """
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    sh """
+                       cd /repo/files/
+                       kubectl apply -f energi3.yaml
+                       """
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
